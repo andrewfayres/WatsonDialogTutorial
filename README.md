@@ -256,5 +256,7 @@ The flow outputs the sending email prompt and halts at the getUserInput node. On
   Trace the flow that happens when you include a person's name with the first prompt (i.e. I'd like to send an email to Joe).
   What happens if the word abort is in the body of the email provided?
 ## 5. Adding new features
-### Meetings
 ### New Contacts
+Add additional contacts so that the assistant can send emails to more than just the few people shown. Include variations for the new names.
+### Meetings
+Create a flow for scheduling a meeting that behaves similar to the existing email flow. How can you handle getting the time for the meeting?
