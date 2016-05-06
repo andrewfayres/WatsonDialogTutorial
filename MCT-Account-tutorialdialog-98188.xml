@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialog xsi:noNamespaceSchemaLocation="WatsonDialogDocument_1.1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <flow>
+        <folder label="Main">
+            <output>
+                <prompt selectionType="RANDOM">
+                    <item>I'm your virtual personal assistant. Is there anything that I can help you with today? Say abort at any time to cancel.</item>
+                    <item>How can I be of assistance? Say abort at any time to cancel.</item>
+                </prompt>
+                <getUserInput id="getUserInput_4">
+                    <input>
+                        <grammar>
+                            <item>$ abort</item>
+                        </grammar>
+                        <goto ref="output_22"/>
+                    </input>
+                    <input>
+                        <grammar>
+                            <item>$ email</item>
+                        </grammar>
+                        <input>
+                            <grammar>
+                                <item>$(PERSON)={PERSON_NAME}</item>
+                            </grammar>
+                            <action varName="PERSON_NAME" operator="SET_TO">{PERSON_NAME.value:main}</action>
+                            <output id="output_19">
+                                <prompt selectionType="RANDOM">
+                                    <item>Sending an email to {PERSON_NAME}. Please enter the body of your email and I'll send it for you.</item>
+                                </prompt>
+                                <getUserInput>
+                                    <input>
+                                    <grammar>
+                                    <item>$ abort</item>
+                                    </grammar>
+                                    <goto ref="output_22"/>
+                                    </input>
+                                    <output>
+                                    <prompt selectionType="RANDOM">
+                                    <item>Okay. Email has been sent.</item>
+                                    </prompt>
+                                    <goto ref="output_22"/>
+                                    </output>
+                                </getUserInput>
+                            </output>
+                        </input>
+                        <output>
+                            <prompt selectionType="RANDOM">
+                                <item>Okay, who would you like to send an email to?</item>
+                            </prompt>
+                            <getUserInput id="getUserInput_16">
+                                <input>
+                                    <grammar>
+                                    <item>$ abort</item>
+                                    </grammar>
+                                    <goto ref="output_22"/>
+                                </input>
+                                <input>
+                                    <grammar>
+                                    <item>$(PERSON)={PERSON_NAME}</item>
+                                    </grammar>
+                                    <action varName="PERSON_NAME" operator="SET_TO">PERSON.value:main</action>
+                                    <goto ref="output_19"/>
+                                </input>
+                                <output>
+                                    <prompt selectionType="RANDOM">
+                                    <item>I don't recognize that person. Please try another name or have them added to my list of known contacts.</item>
+                                    </prompt>
+                                    <goto ref="getUserInput_16"/>
+                                </output>
+                            </getUserInput>
+                        </output>
+                    </input>
+                    <input>
+                        <grammar>
+                            <item>$ meeting</item>
+                        </grammar>
+                    </input>
+                </getUserInput>
+            </output>
+            <output id="output_22">
+                <prompt selectionType="RANDOM">
+                    <item>Is there anything else that I can help you with?</item>
+                </prompt>
+                <getUserInput>
+                    <input>
+                        <grammar>
+                            <item>Yes</item>
+                        </grammar>
+                        <output>
+                            <prompt selectionType="RANDOM">
+                                <item>What else can I do for you?</item>
+                            </prompt>
+                            <goto ref="getUserInput_4"/>
+                        </output>
+                    </input>
+                    <output>
+                        <prompt selectionType="RANDOM">
+                            <item>See you next time.</item>
+                        </prompt>
+                    </output>
+                </getUserInput>
+            </output>
+            <default>
+                <output>
+                    <prompt selectionType="RANDOM">
+                        <item>I'm sorry but I didn't understand.</item>
+                    </prompt>
+                </output>
+            </default>
+        </folder>
+        <folder label="Library"/>
+        <folder label="Global"/>
+        <folder label="Concepts">
+            <concept>
+                <grammar>
+                    <item>email</item>
+                    <item>e-mail</item>
+                    <item>e mail</item>
+                </grammar>
+            </concept>
+            <concept>
+                <grammar>
+                    <item>meeting</item>
+                    <item>appointment</item>
+                    <item>conference</item>
+                    <item>event</item>
+                    <item>calendar</item>
+                </grammar>
+            </concept>
+            <concept>
+                <grammar>
+                    <item>schedule</item>
+                    <item>book</item>
+                    <item>create</item>
+                </grammar>
+            </concept>
+            <concept>
+                <grammar>
+                    <item>cancel</item>
+                    <item>end</item>
+                    <item>remove</item>
+                    <item>erase</item>
+                </grammar>
+            </concept>
+        </folder>
+    </flow>
+    <entities>
+        <entity name="PERSON" entityType="GENERIC">
+            <value name="Andrew" value="Andrew">
+                <grammar>
+                    <item>Andy</item>
+                </grammar>
+            </value>
+            <value name="Joe" value="Joe">
+                <grammar>
+                    <item>Joseph</item>
+                </grammar>
+            </value>
+            <value name="Max" value="Max"/>
+            <value name="Anthony" value="Anthony"/>
+            <entityRules></entityRules>
+        </entity>
+    </entities>
+    <constants>
+        <var_folder name="Home"/>
+    </constants>
+    <variables>
+        <var_folder name="Home">
+            <var_folder name="PersonName" type="VAR">
+                <var name="PERSON_NAME" type="TEXT"/>
+            </var_folder>
+        </var_folder>
+    </variables>
+    <settings>
+        <setting name="AUTOLEARN" type="USER">false</setting>
+        <setting name="LANGUAGE" type="USER">en-US</setting>
+        <setting name="RESPONSETIME" type="USER">-2</setting>
+        <setting name="MAXAUTOLEARNITEMS" type="USER">0</setting>
+        <setting name="NUMAUTOSETRELATED" type="USER">0</setting>
+        <setting name="TIMEZONEID" type="USER">Australia/Sydney</setting>
+        <setting name="AUTOSETRELATEDNODEID" type="USER">0</setting>
+        <setting name="INPUTMASKTYPE" type="USER">0</setting>
+        <setting name="CONCEPTMATCHING" type="USER">0</setting>
+        <setting name="DNR_NODE_ID">-15</setting>
+        <setting name="MULTISENT">0</setting>
+        <setting name="USE_CONCEPTS">3</setting>
+        <setting name="ENTITIES_SCOPE">3</setting>
+        <setting name="USER_LOGGING">2</setting>
+        <setting name="USE_TRANSLATIONS">3</setting>
+        <setting name="USE_STOP_WORDS">3</setting>
+        <setting name="USE_SPELLING_CORRECTIONS">3</setting>
+        <setting name="USE_AUTOMATIC_STOPWORDS_DETECTION">0</setting>
+        <setting name="PLATFORM_VERSION">10.1</setting>
+    </settings>
+    <specialSettings>
+        <specialSetting label="DNR Join Statement">
+            <variations/>
+        </specialSetting>
+        <specialSetting label="AutoLearn Statement">
+            <variations/>
+        </specialSetting>
+    </specialSettings>
+</dialog>
