@@ -58,7 +58,7 @@
                                     <grammar>
                                     <item>$(PERSON)={PERSON_NAME}</item>
                                     </grammar>
-                                    <action varName="PERSON_NAME" operator="SET_TO">PERSON.value:main</action>
+                                    <action varName="PERSON_NAME" operator="SET_TO">{PERSON_NAME.value:main}</action>
                                     <goto ref="output_19"/>
                                 </input>
                                 <output>
@@ -81,6 +81,7 @@
                 <prompt selectionType="RANDOM">
                     <item>Is there anything else that I can help you with?</item>
                 </prompt>
+                <action varName="PERSON_NAME" operator="SET_TO_BLANK"/>
                 <getUserInput>
                     <input>
                         <grammar>
